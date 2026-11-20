@@ -1,0 +1,15 @@
+name: refresh-tokens
+on:
+  schedule:
+    - cron: "0 3 1,15 * *"
+  workflow_dispatch:
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python refresh_tokens.py
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          IG_TOKEN_ELECTRICITY: ${{ secrets.IG_TOKEN_ELECTRICITY }}
+          IG_TOKEN_ELECTRONICS: ${{ secrets.IG_TOKEN_ELECTRONICS }}
